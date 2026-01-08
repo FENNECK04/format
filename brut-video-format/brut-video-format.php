@@ -3,7 +3,7 @@
  * Plugin Name: Brut Video Format
  * Description: Custom single template and layout for brut_video posts with YouTube embeds and selectable categories.
  * Version: 1.0.0
- * Author: OpenAI
+ * Author: BH Media
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
