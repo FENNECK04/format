@@ -1,18 +1,12 @@
 .brut-video-format {
-    padding: 3rem 1.5rem;
+    padding: 2rem 1.5rem;
 }
 
 .brut-video-format__container {
     display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 2.5rem;
     align-items: flex-start;
-    max-width: 1280px;
-    margin: 0 auto;
-}
-
-.brut-video-format--fullwidth .brut-video-format__container {
-    max-width: 1400px;
 }
 
 .brut-video-format__media {
@@ -41,15 +35,6 @@
 .brut-video-format__content {
     flex: 1 1 35%;
     min-width: 280px;
-}
-
-body.brut-video-format-page .entry-header,
-body.brut-video-format-page .entry-title,
-body.brut-video-format-page .breadcrumb,
-body.brut-video-format-page .breadcrumbs,
-body.brut-video-format-page .yoast-breadcrumbs,
-body.brut-video-format-page .rank-math-breadcrumb {
-    display: none !important;
 }
 
 .brut-video-format__categories {
