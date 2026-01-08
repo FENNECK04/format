@@ -1,31 +1,35 @@
 .brut-video-format {
-    padding: 3rem 1.5rem;
+    padding: 4rem 1.5rem 5rem;
+    font-family: "Georgia", "Times New Roman", serif;
+    color: #111;
+    background: #fff;
 }
 
 .brut-video-format__container {
     display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 3.5rem;
     align-items: flex-start;
     max-width: 1280px;
     margin: 0 auto;
 }
 
 .brut-video-format--fullwidth .brut-video-format__container {
-    max-width: 1400px;
+    max-width: 1440px;
 }
 
 .brut-video-format__media {
-    flex: 1 1 55%;
+    flex: 1 1 58%;
     min-width: 320px;
 }
 
 .brut-video-format__embed {
     position: relative;
     padding-top: 56.25%;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
     background: #000;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.25);
 }
 
 .brut-video-format__embed iframe,
@@ -39,7 +43,7 @@
 }
 
 .brut-video-format__content {
-    flex: 1 1 35%;
+    flex: 1 1 34%;
     min-width: 280px;
 }
 
@@ -66,28 +70,44 @@ body.brut-video-format-page .rank-math-breadcrumb {
     border-radius: 999px;
     border: 1px solid #d9d9d9;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
 }
 
 .brut-video-format__title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1;
-    margin: 0 0 1rem;
+    font-size: clamp(2.25rem, 4.5vw, 3.4rem);
+    line-height: 1.08;
+    margin: 0 0 1.5rem;
+    font-weight: 700;
 }
 
 .brut-video-format__excerpt {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: #1b1b1b;
 }
 
 .brut-video-format__date {
     color: #6b6b6b;
     font-size: 0.95rem;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 @media (max-width: 960px) {
+    .brut-video-format {
+        padding: 2.5rem 1.25rem 3.5rem;
+    }
+
     .brut-video-format__container {
         flex-direction: column;
+    }
+
+    .brut-video-format__title {
+        font-size: clamp(2rem, 6vw, 2.6rem);
     }
 }
