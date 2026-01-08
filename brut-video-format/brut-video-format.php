@@ -27,11 +27,38 @@ function brut_video_format_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'brut_video_format_enqueue_assets' );
 
 /**
+ * Ensure brut_video supports template selection in the editor.
+ */
+function brut_video_format_add_post_type_support() {
+    add_post_type_support( 'brut_video', 'page-attributes' );
+}
+add_action( 'init', 'brut_video_format_add_post_type_support' );
+
+/**
+ * Register plugin templates in the template dropdown.
+ */
+function brut_video_format_register_templates( $page_templates, $theme, $post, $post_type ) {
+    if ( 'brut_video' !== $post_type ) {
+        return $page_templates;
+    }
+
+    $page_templates['brut-video-format-fullwidth.php'] = __( 'Brut Video - Plein écran', 'brut-video-format' );
+
+    return $page_templates;
+}
+add_filter( 'theme_page_templates', 'brut_video_format_register_templates', 10, 4 );
+
+/**
  * Use plugin template for brut_video if theme does not provide one.
  */
 function brut_video_format_template_include( $template ) {
     if ( ! is_singular( 'brut_video' ) ) {
         return $template;
+    }
+
+    $selected_template = get_page_template_slug( get_queried_object_id() );
+    if ( 'brut-video-format-fullwidth.php' === $selected_template ) {
+        return BRUT_VIDEO_FORMAT_PATH . '/templates/brut-video-format-fullwidth.php';
     }
 
     $theme_template = locate_template( array( 'single-brut_video.php' ) );
@@ -42,6 +69,25 @@ function brut_video_format_template_include( $template ) {
     return BRUT_VIDEO_FORMAT_PATH . '/templates/single-brut_video.php';
 }
 add_filter( 'template_include', 'brut_video_format_template_include' );
+
+/**
+ * Add body classes for brut_video layouts.
+ */
+function brut_video_format_body_classes( $classes ) {
+    if ( ! is_singular( 'brut_video' ) ) {
+        return $classes;
+    }
+
+    $selected_template = get_page_template_slug( get_queried_object_id() );
+    $classes[]         = 'brut-video-format-page';
+
+    if ( 'brut-video-format-fullwidth.php' === $selected_template ) {
+        $classes[] = 'brut-video-format-fullwidth';
+    }
+
+    return $classes;
+}
+add_filter( 'body_class', 'brut_video_format_body_classes' );
 
 /**
  * Add meta box for YouTube URL and category display selection.
