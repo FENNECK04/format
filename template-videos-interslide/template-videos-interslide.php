@@ -11,4 +11,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once __DIR__ . '/brut-video-format.php';
-require_once __DIR__ . '/interslide-video-formats/interslide-video-formats.php';

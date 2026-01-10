@@ -19,6 +19,7 @@ while ( have_posts() ) {
     $excerpt     = has_excerpt() ? get_the_excerpt() : '';
     $date        = get_the_date();
     $author      = get_the_author();
+    $clean_body  = brut_video_format_render_clean_content( $post_id );
 
     $related_query = new WP_Query(
         array(
@@ -32,6 +33,15 @@ while ( have_posts() ) {
                     'terms'    => wp_list_pluck( $categories, 'term_id' ),
                 ),
             ) : array(),
+        )
+    );
+    $next_query = new WP_Query(
+        array(
+            'post_type'      => 'brut_video',
+            'posts_per_page' => 1,
+            'post__not_in'   => array( $post_id ),
+            'orderby'        => 'date',
+            'order'          => 'DESC',
         )
     );
     ?>
@@ -51,7 +61,17 @@ while ( have_posts() ) {
                 <?php endif; ?>
             </div>
 
-            <header class="brut-video-format__header">
+            <div class="brut-video-format__layout">
+                <div class="brut-video-format__media">
+                    <?php if ( $embed ) : ?>
+                        <div class="brut-video-format__embed">
+                            <?php echo $embed; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <div class="brut-video-format__editorial">
+                    <header class="brut-video-format__header">
                 <?php if ( ! empty( $categories ) ) : ?>
                     <div class="brut-video-format__categories">
                         <?php foreach ( $categories as $category ) : ?>
@@ -81,26 +101,42 @@ while ( have_posts() ) {
                 </div>
             </header>
 
-            <div class="brut-video-format__layout">
-                <div class="brut-video-format__media">
-                    <?php if ( $embed ) : ?>
-                        <div class="brut-video-format__embed">
-                            <?php echo $embed; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                <div class="brut-video-format__content">
-                    <?php the_content(); ?>
+                    <div class="brut-video-format__content">
+                        <?php echo $clean_body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    </div>
 
                     <div class="brut-video-format__actions">
                         <button class="brut-video-format__copy" type="button" data-url="<?php echo esc_url( get_permalink() ); ?>">
                             <?php esc_html_e( 'Copier le lien', 'brut-video-format' ); ?>
                         </button>
-                        <a class="brut-video-format__share" href="https://twitter.com/intent/tweet?url=<?php echo esc_url( rawurlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener">X</a>
-                        <a class="brut-video-format__share" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo esc_url( rawurlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener">LinkedIn</a>
-                        <a class="brut-video-format__share" href="https://wa.me/?text=<?php echo esc_url( rawurlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener">WhatsApp</a>
                     </div>
+
+                    <?php if ( $next_query->have_posts() ) : ?>
+                        <?php $next_query->the_post(); ?>
+                        <section class="brut-video-format__next">
+                            <span class="brut-video-format__section-label"><?php esc_html_e( 'À suivre', 'brut-video-format' ); ?></span>
+                            <a href="<?php the_permalink(); ?>" class="brut-video-format__next-card">
+                                <div class="brut-video-format__next-media">
+                                    <?php if ( has_post_thumbnail() ) : ?>
+                                        <?php the_post_thumbnail( 'medium_large' ); ?>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="brut-video-format__next-content">
+                                    <h3><?php the_title(); ?></h3>
+                                </div>
+                            </a>
+                        </section>
+                        <?php wp_reset_postdata(); ?>
+                    <?php endif; ?>
                 </div>
+
+                <aside class="brut-video-format__sharebar">
+                    <a class="brut-video-format__share" href="https://wa.me/?text=<?php echo esc_url( rawurlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+                    <a class="brut-video-format__share" href="https://t.me/share/url?url=<?php echo esc_url( rawurlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+                    <a class="brut-video-format__share" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url( rawurlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+                    <a class="brut-video-format__share" href="https://twitter.com/intent/tweet?url=<?php echo esc_url( rawurlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener" aria-label="X">X</a>
+                    <a class="brut-video-format__share" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo esc_url( rawurlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+                </aside>
             </div>
 
             <?php if ( $related_query->have_posts() ) : ?>

@@ -161,3 +161,30 @@ function brut_video_format_get_display_categories( $post_id ) {
 
     return array_slice( $selected, 0, $limit );
 }
+
+/**
+ * Render content without title/cover blocks to avoid duplicates.
+ */
+function brut_video_format_render_clean_content( $post_id ) {
+    $post = get_post( $post_id );
+    if ( ! $post ) {
+        return '';
+    }
+
+    if ( ! has_blocks( $post->post_content ) ) {
+        return wp_kses_post( wpautop( $post->post_content ) );
+    }
+
+    $blocks     = parse_blocks( $post->post_content );
+    $output     = '';
+    $block_skip = array( 'core/post-title', 'core/cover' );
+
+    foreach ( $blocks as $block ) {
+        if ( isset( $block['blockName'] ) && in_array( $block['blockName'], $block_skip, true ) ) {
+            continue;
+        }
+        $output .= render_block( $block );
+    }
+
+    return $output;
+}
