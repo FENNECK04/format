@@ -1,0 +1,226 @@
+.isv {
+    font-family: "Georgia", "Times New Roman", serif;
+    color: #111;
+    background: #fff;
+    padding: 3.5rem 1.5rem 5rem;
+}
+
+.isv-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.isv-meta {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #666;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+}
+
+.isv-meta__link,
+.isv-meta__label {
+    color: inherit;
+    text-decoration: none;
+}
+
+.isv-header {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.isv-title {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.05;
+    margin: 0 0 1rem;
+}
+
+.isv-excerpt {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+    color: #222;
+}
+
+.isv-submeta {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #555;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.isv-player {
+    margin: 2rem 0 2.5rem;
+}
+
+.isv-embed,
+.isv-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
+}
+
+.isv-embed--lazy {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.isv-embed--lazy img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.isv-embed__play {
+    position: absolute;
+    border: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.isv-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 760px;
+}
+
+.isv-actions {
+    margin: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.isv-copy,
+.isv-share {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    border: 1px solid #ccc;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    background: #fff;
+    color: #111;
+    cursor: pointer;
+}
+
+.isv-section {
+    margin-top: 3rem;
+}
+
+.isv-section__title {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.isv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.isv-card {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 1rem;
+}
+
+.isv-card__media {
+    position: relative;
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+}
+
+.isv-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.isv-card__duration {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+}
+
+.isv-card__content {
+    margin-top: 0.8rem;
+}
+
+.isv-card__category {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #777;
+}
+
+.isv-card__title {
+    font-size: 1rem;
+    margin: 0.3rem 0 0;
+}
+
+.isv-card__title a {
+    text-decoration: none;
+    color: #111;
+}
+
+.isv-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.isv-tag {
+    border: 1px solid #ccc;
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #333;
+    text-decoration: none;
+}
+
+.isv-sources {
+    padding-left: 1rem;
+}
+
+@media (max-width: 900px) {
+    .isv {
+        padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .isv-content {
+        max-width: 100%;
+    }
+}
