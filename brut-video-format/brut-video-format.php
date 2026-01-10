@@ -21,8 +21,9 @@ function brut_video_format_enqueue_assets() {
         return;
     }
 
-    $css_path = plugin_dir_url( __FILE__ ) . 'assets/css/brut-video-format.css';
-    wp_enqueue_style( 'brut-video-format', $css_path, array(), BRUT_VIDEO_FORMAT_VERSION );
+    $base_url = plugin_dir_url( __FILE__ );
+    wp_enqueue_style( 'brut-video-format', $base_url . 'assets/css/brut-video-format.css', array(), BRUT_VIDEO_FORMAT_VERSION );
+    wp_enqueue_script( 'brut-video-format', $base_url . 'assets/js/brut-video-format.js', array(), BRUT_VIDEO_FORMAT_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'brut_video_format_enqueue_assets' );
 
@@ -35,35 +36,11 @@ function brut_video_format_add_post_type_support() {
 add_action( 'init', 'brut_video_format_add_post_type_support' );
 
 /**
- * Register plugin templates in the template dropdown.
- */
-function brut_video_format_register_templates( $page_templates, $theme, $post, $post_type ) {
-    if ( 'brut_video' !== $post_type ) {
-        return $page_templates;
-    }
-
-    $page_templates['brut-video-format-fullwidth.php'] = __( 'Brut Video - Plein écran', 'brut-video-format' );
-
-    return $page_templates;
-}
-add_filter( 'theme_page_templates', 'brut_video_format_register_templates', 10, 4 );
-
-/**
  * Use plugin template for brut_video if theme does not provide one.
  */
 function brut_video_format_template_include( $template ) {
     if ( ! is_singular( 'brut_video' ) ) {
         return $template;
-    }
-
-    $selected_template = get_page_template_slug( get_queried_object_id() );
-    if ( 'brut-video-format-fullwidth.php' === $selected_template ) {
-        return BRUT_VIDEO_FORMAT_PATH . '/templates/brut-video-format-fullwidth.php';
-    }
-
-    $theme_template = locate_template( array( 'single-brut_video.php' ) );
-    if ( $theme_template ) {
-        return $theme_template;
     }
 
     return BRUT_VIDEO_FORMAT_PATH . '/templates/single-brut_video.php';
@@ -78,12 +55,7 @@ function brut_video_format_body_classes( $classes ) {
         return $classes;
     }
 
-    $selected_template = get_page_template_slug( get_queried_object_id() );
-    $classes[]         = 'brut-video-format-page';
-
-    if ( 'brut-video-format-fullwidth.php' === $selected_template ) {
-        $classes[] = 'brut-video-format-fullwidth';
-    }
+    $classes[] = 'brut-video-format-page';
 
     return $classes;
 }
