@@ -17,6 +17,7 @@ Plugin qui fournit un nouveau format d'affichage pour toutes les pages du post t
 
 == Usage ==
 - brut_video : applique automatiquement le template du plugin.
+- Un modèle Elementor "Brut Video - Template Interslide" est créé automatiquement si Elementor est actif.
 
 == FAQ ==
 = Le template brut_video ne s'affiche pas ? =
